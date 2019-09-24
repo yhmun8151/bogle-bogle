@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
 import {
+    StyleSheet,
     View,
     Alert,
     Text,
     AppState,
     Button,
-    NativeModules
+    NativeModules,
+    requireNativeComponent
 } from "react-native";
 import codePush from "react-native-code-push";
+
+const NativeView = requireNativeComponent("Bulb")
 
 export default class extends Component {
     constructor(props) {
@@ -106,10 +110,10 @@ export default class extends Component {
     render(){
         if(!this.state.progress) {
             return (
-            <View>
+            <View style={styles.container}>
                 <Text>state proress is nulled</Text>
+                <NativeView style={ styles.bottom } />
                 <Button onPress={this.turnOff} title="CallNative" color="#FF6347" />
-
             </View>
             )
         }
@@ -135,4 +139,19 @@ export default class extends Component {
     }
 
 }
+
+
+const styles = StyleSheet.create({
+
+    container: {
+        flex: 1,
+        backgroundColor: '#F5FCFF',
+    },
+    bottom: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+
+});
 
