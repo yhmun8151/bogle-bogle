@@ -3,7 +3,9 @@ import {
     View,
     Alert,
     Text,
-    AppState
+    AppState,
+    Button,
+    NativeModules
 } from "react-native";
 import codePush from "react-native-code-push";
 
@@ -14,6 +16,11 @@ export default class extends Component {
             syncMessage : null,
             progress : null
         }
+    }
+
+
+    turnOff = () => {
+      NativeModules.CallNative.sendMassageToMain("hahaha");
     }
 
     codePushSync() {
@@ -98,7 +105,13 @@ export default class extends Component {
 
     render(){
         if(!this.state.progress) {
-            return (<View><Text>state proress is nulled</Text></View>)
+            return (
+            <View>
+                <Text>state proress is nulled</Text>
+                <Button onPress={this.turnOff} title="CallNative" color="#FF6347" />
+
+            </View>
+            )
         }
         let syncView, progressView;
         if (this.state.syncMessage) {
